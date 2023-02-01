@@ -22,8 +22,8 @@ const App = () => {
       data: {
         username: term
       },
-      success: null,
-      error: null
+      success: null, // force refresh.
+      error: null // comment
     })
 
     console.log(`${term} was searched`);
