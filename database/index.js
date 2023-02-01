@@ -49,9 +49,6 @@ let save = (usernameRepo) => {
 
   for (var i = 0; i < usernameArray.length; i++) {
 
-
-
-
       var eachRepo = new Repo({
         username: usernameArray[i].owner.login,
         individualRepo: usernameArray[i].full_name,
@@ -61,16 +58,10 @@ let save = (usernameRepo) => {
 
       eachRepo.save(); //THIS WORKS
 
-
-
-    // console.log(eachRepo);
   }
-    // const userRepo = Repo.find({});
-    // console.log(userRepo)
-  // console.log(usernameRepo.data);
-  // console.log('hi');
 
-  // console.log(Repo.find({username: 'octocat'}))
+
 }
 
 module.exports.save = save;
+module.exports.Repo = Repo;

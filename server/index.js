@@ -9,7 +9,6 @@ const gitHub = require('../helpers/github');
 // Set up static file service for files in the `client/dist` directory.
 // Webpack is configured to generate files in that directory and
 // this server must serve those files when requested.
-
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/repos', function (req, res) {
@@ -20,12 +19,7 @@ app.post('/repos', function (req, res) {
 
   //COMPLETE "Complete post to repos endpoint"
 
-
-
-
-
-
-
+console.log(MongoDbStorage)
 
   gitHub.getReposByUsername(req.body.username)
     .then((data) => { //if username is found
@@ -41,6 +35,21 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+
+   MongoDbStorage.Repo.aggregate([{ $sort: {stargazer: -1} }]).then((data) => {
+    console.log('-------organized------>', data);
+    res.send(data);
+   }).catch(() => {
+    console.log('Failed to render the repos from database')
+   })
+
+
+
+
+
+
+
+
 });
 
 let port = 1128;
