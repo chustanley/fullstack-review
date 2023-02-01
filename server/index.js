@@ -29,7 +29,7 @@ app.post('/repos', function (req, res) {
 
   gitHub.getReposByUsername(req.body.username)
     .then((data) => { //if username is found
-      // console.log(data);
+
       MongoDbStorage.save(data);
     })
     .catch((err) => { // if username is now found
