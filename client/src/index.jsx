@@ -9,6 +9,23 @@ const App = () => {
   const [repos, setRepos] = useState([]);
 
   const search = (term) => {
+
+    // term = whatever you type into userbar
+
+
+    // $.post('http://localhost:1128/repos', term);
+
+
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:1128/repos',
+      data: {
+        username: term
+      },
+      success: null,
+      error: null
+    })
+
     console.log(`${term} was searched`);
   }
 
