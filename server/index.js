@@ -11,23 +11,34 @@ const gitHub = require('../helpers/github');
 // this server must serve those files when requested.
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.post('/repos', function (req, res) {
+app.use(express.static(__dirname + '/../client/dist')); // html file
+
+
+
+
+
+
+app.post('/repos', function (req, res) { // keep an eye out
   // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
 
   //COMPLETE "Complete post to repos endpoint"
-
-console.log(MongoDbStorage)
-
   gitHub.getReposByUsername(req.body.username)
     .then((data) => { //if username is found
-
-      MongoDbStorage.save(data);
+      return MongoDbStorage.save(data)
     })
+    .then((stan) => {
+
+      if (stan.length) {
+        res.send(stan)
+      } else {
+        throw stan
+      }
+    }) //THIS WORKS
     .catch((err) => { // if username is now found
-      console.log('USER NOT FOUND')
+      res.send(err);
     })
 
 });
@@ -36,14 +47,15 @@ app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
 
-   MongoDbStorage.Repo.aggregate([{ $sort: {stargazer: -1} }]).then((data) => {
+   MongoDbStorage.Repo.aggregate([{ $sort: {stargazer: -1} }]).limit(25)
+  .then((data) => {
     console.log('-------organized------>', data);
     res.send(data);
-   }).catch(() => {
-    console.log('Failed to render the repos from database')
    })
-
-
+   .catch((err) => {
+    console.log('Failed to render the repos from database')
+    res.send(err);
+   })
 
 
 

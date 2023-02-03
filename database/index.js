@@ -5,12 +5,13 @@ console.log('connected');
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
-
+  _id: {
+    type: Number,
+    unique: true,
+    required: true
+  },
   username: String,
-  individualRepo: {
-    type: String,
-    unique: true
-  }, // full_name
+  individualRepo: String, // full_name
   // This is going to be owner/repoName because many users can create the same repo name. Having this key value to identify the repo will be the best way possible because it also mentions where it came from.
   stargazer: Number, // This is going to be considered for the top 25 repo's
   allRepo: String //The reason why we have this one is because when someone types in a username, it should save all the users repos onto the database. Say our users of our website sees the 25 top repos but sees a very specific one that they like and want to view other repos from that one creator, we can also render that and etc (if thats what the sprint wants us to consider)
@@ -46,19 +47,22 @@ let save = (usernameRepo) => {
   // the MongoDB
 
   var usernameArray = usernameRepo.data;
+  var resultArray = [];
 
   for (var i = 0; i < usernameArray.length; i++) {
 
-      var eachRepo = new Repo({
+      var eachRepo = {
+        _id: usernameArray[i].id,
         username: usernameArray[i].owner.login,
         individualRepo: usernameArray[i].full_name,
         stargazer: usernameArray[i].stargazers_count,
         allRepo: usernameArray[i].owner.repos_url
-      });
+      };
 
-      eachRepo.save(); //THIS WORKS
-
+      resultArray.push(eachRepo);
   }
+
+  return Repo.insertMany(resultArray);
 
 
 }
