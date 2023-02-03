@@ -11,10 +11,10 @@ let repoSchema = mongoose.Schema({
     required: true
   },
   username: String,
-  individualRepo: String, // full_name
+  repoName: String, // full_name
   // This is going to be owner/repoName because many users can create the same repo name. Having this key value to identify the repo will be the best way possible because it also mentions where it came from.
   stargazer: Number, // This is going to be considered for the top 25 repo's
-  allRepo: String //The reason why we have this one is because when someone types in a username, it should save all the users repos onto the database. Say our users of our website sees the 25 top repos but sees a very specific one that they like and want to view other repos from that one creator, we can also render that and etc (if thats what the sprint wants us to consider)
+  repoLink: String //The reason why we have this one is because when someone types in a username, it should save all the users repos onto the database. Say our users of our website sees the 25 top repos but sees a very specific one that they like and want to view other repos from that one creator, we can also render that and etc (if thats what the sprint wants us to consider)
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
@@ -54,9 +54,9 @@ let save = (usernameRepo) => {
       var eachRepo = {
         _id: usernameArray[i].id,
         username: usernameArray[i].owner.login,
-        individualRepo: usernameArray[i].full_name,
+        repoName: usernameArray[i].name,
         stargazer: usernameArray[i].stargazers_count,
-        allRepo: usernameArray[i].owner.repos_url
+        repoLink: usernameArray[i].html_url
       };
 
       resultArray.push(eachRepo);

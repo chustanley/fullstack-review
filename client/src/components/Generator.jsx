@@ -7,16 +7,15 @@ const Generator = ({ individual }) => {
   console.log(individual);
 
   var username = individual.username;
-  var repository = individual.individualRepo;
+  var repository = individual.repoName;
   var popularity = individual.stargazer;
-  var moreRepoFromUser = individual.allRepo;
+  var moreRepoFromUser = individual.repoLink;
 
   return (
     <div className='repo'>
-      <div > Username: {username} </div>
-      <div> Resository: {repository} </div>
+      <div> Username: {username} </div>
+      <div> Repository: <a href={moreRepoFromUser}>{repository}</a> </div>
       <div> Popularity Rating: {popularity} </div>
-      <div> More Repositories From User: {moreRepoFromUser} </div>
     </div>
   )
 }
