@@ -1,6 +1,51 @@
 .repo {
-  padding-bottom: 50px;
+
+  margin-bottom: 50px;
+  /* border-style: solid; */
+  border-radius: 5px;
+  background: white;
+  padding: 10px;
+  width: 420px;
 }
+
+#githubfetcher {
+  padding-left: 10px;
+  padding-right: 10px;
+  transform: translateY(-175%);
+  font-size: 25px;
+}
+
+#repoimage {
+  display: inline-block;
+  width: 100px;
+}
+
 #repocounter {
-  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+
+.title {
+  display: inline-block;
+
+}
+
+#image {
+  width: 200px;
+}
+
+#button {
+  font-family: American Typewriter;
+}
+
+#body {
+  background-color: lightblue;
+  font-family: American Typewriter;
+}
+
+.repodescription {
+  display: inline-block;
+  padding-left: 10px;
+  top: 50%;
+  transform: translateY(-50%); /* this and top is what makes the div centered inside the div*/
+  font-family: American Typewriter;
 }

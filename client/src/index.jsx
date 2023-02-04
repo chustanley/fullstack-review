@@ -32,8 +32,7 @@ const App = () => {
 
   useEffect(() => {
     refresh();
-  }, repos)
-
+  }, []); // leaving an array here will invoke the function ONCE per render
 
 
   const search = (term) => {
@@ -41,7 +40,7 @@ const App = () => {
     // $.post('http://localhost:1128/repos', term);
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:1128/repos',
+      url: 'http://localhost:1128/repos',// can remove localhost
       data: {
         username: term
       },
@@ -50,7 +49,7 @@ const App = () => {
         refresh();
       }, // force refresh.
       error: (err) => {
-        console.log('Error or Duplicate found')
+        alert('Username not found! Please try again')
       } // comment
     })
 
@@ -63,7 +62,11 @@ const App = () => {
 
   return (
     <div>
-      <h1>Github Fetcher</h1>
+      <div>
+        <h1 id='githubfetcher' className='title'>Github</h1>
+        <img id='image' className='title' src='github gif.gif'></img>
+        <h1 id='githubfetcher' className='title'>Fetcher</h1>
+      </div>
       <Search onSearch={search}/>
       <RepoList repos={repos}/>
     </div>

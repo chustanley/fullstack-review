@@ -13,10 +13,14 @@ const Generator = ({ individual }) => {
 
   return (
     <div className='repo'>
-      <div> Username: {username} </div>
-      <div> Repository: <a href={moreRepoFromUser}>{repository}</a> </div>
-      <div> Popularity Rating: {popularity} </div>
+      <img id='repoimage' src='repoimage.gif'></img>
+      <div className='repodescription'>
+        <div> Username: {username} </div>
+        <div> Repository: <a href={moreRepoFromUser}>{repository}</a> </div>
+        <div> Popularity Rating: {popularity} </div>
+      </div>
     </div>
+
   )
 }
 

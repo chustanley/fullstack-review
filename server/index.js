@@ -25,8 +25,9 @@ app.post('/repos', function (req, res) { // keep an eye out
   // save the repo information in the database
  // comment
   //COMPLETE "Complete post to repos endpoint"
-  gitHub.getReposByUsername(req.body.username)
+  gitHub.getReposByUsername(req.body.username) // if repo name not found will go straight to error
     .then((data) => { //if username is found
+      console.log('sucess')
       return MongoDbStorage.save(data)
     })
     .then((stan) => {
@@ -38,10 +39,15 @@ app.post('/repos', function (req, res) { // keep an eye out
       }
     }) //THIS WORKS
     .catch((err) => { // if username is now found
-      res.send(err);
+      res.status(404).send(err);
+
     })
 
 });
+
+
+
+
 
 app.get('/repos', function (req, res) {
   // TODO - your code here!
@@ -54,7 +60,7 @@ app.get('/repos', function (req, res) {
    })
    .catch((err) => {
     console.log('Failed to render the repos from database')
-    res.send(err);
+    res.status(404).send(err);
    })
 
 
