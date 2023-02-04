@@ -32,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     refresh();
-  }, []); // leaving an array here will invoke the function ONCE per render
+  }, []); // leaving an array here will invoke the function ONCE per render //approved message
 
 
   const search = (term) => {
